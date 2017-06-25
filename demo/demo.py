@@ -2,6 +2,8 @@ import pygame
 from pygame.locals import *
 from engine.app import GAPP
 from valley.world import GridWorld
+from valley.terrain import *
+import datetime
 
 
 class App(GAPP):
@@ -22,16 +24,19 @@ class App(GAPP):
         self._running = True
 
     def setup(self):
-        GridWorld((10, 10))
+        self._world = GridWorld((10, 10))
+        self.rect = None
 
     def on_loop(self):
-        pass
+        if self.rect and self.rect.collidepoint(pygame.mouse.get_pos()):
+            print(datetime.datetime.now(), "mouse is over 'newGameButton'")
 
     def on_render(self):
         self._display_surf.lock()
-        for i in range(60):
-            for j in range(40):
-                pygame.draw.rect(self._display_surf, (255, 255, 255), pygame.Rect(i * 10, j * 10, 8, 8))
+        for i in range(10):
+            for j in range(10):
+                self.rect = pygame.draw.rect(self._display_surf, TerrainColor[self._world[i, j]],
+                                             pygame.Rect(i * 10, j * 10, 10, 10))
         self._display_surf.unlock()
         pygame.display.update()
         self._clock.tick(30)
