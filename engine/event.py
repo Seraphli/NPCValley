@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 
 
-class GEvent:
+class GEvent(object):
     def __init__(self):
         pass
 

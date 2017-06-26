@@ -11,7 +11,7 @@ class App(GAPP):
         super(App, self).__init__()
         self._running = True
         self._display_surf = None
-        self.size = self.weight, self.height = 640, 480
+        self.size = self.width, self.height = 640, 480
         self.fps = 30
 
     def on_init(self):
@@ -24,7 +24,7 @@ class App(GAPP):
         self._running = True
 
     def setup(self):
-        self._world = GridWorld((10, 10))
+        self._world = GridWorld((100, 100))
         self.rect = None
 
     def on_loop(self):
